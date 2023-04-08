@@ -44,7 +44,8 @@ class Naratif:
     
     def buttonClick(self, index): 
         if isinstance(self.courant, Choix) :
-            self.suivant = self.courant.getPath(0)
+            self.suivant = self.courant.getPath(index)
+            self.allerSuivant()
     
     #Input
     def inputType(self):

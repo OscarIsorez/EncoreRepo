@@ -2,6 +2,7 @@ import math
 import pygame
 
 from button import Button
+from narratif.gameNaratif import Naratif
 
 BG_COLOR = (255, 255, 0)
 INPUT_FIELD_ACTIVE_COLOR = pygame.Color('lightskyblue3')
@@ -10,12 +11,16 @@ INPUT_FIELD_PASSIVE_COLOR = pygame.Color('chartreuse4')
 BULLE_IMG_PATH = "./assets/bulle1.jpg"
 
 class Scene:
-    def __init__(self, surface, font, characterImage, characterDialog, text1, action1, text2, action2):
+    def __init__(self, surface, font, characterImage, gameNaratif, characterDialog, text1, action1, text2, action2):
+        self.gameNaratif: Naratif = gameNaratif
+
         self.action1 = action1
         self.action2 = action2
 
-        image = pygame.image.load(characterImage)
+        self.surface = surface
+        self.font = font
 
+        image = pygame.image.load(characterImage)
         self.characterImage = pygame.transform.scale(image, (400, 200))
         self.characterImageRect = image.get_rect()
         self.characterImageRect.x = math.ceil(surface.get_width() / 6)
@@ -39,12 +44,46 @@ class Scene:
         self.inputRect = pygame.Rect(200, 200, 140, 32)
 
 
+    def updateDialog(self):
+        dialog = self.gameNaratif.paragraphCourant()
+        self.dialogText = self.font.render(dialog, True, (0, 0, 0))
+        self.dialogTextRect = self.dialogText.get_rect()
+        self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
+
+        # self.button1.text = self.gameNaratif.courant.choix[0]
+        # self.button2.text = self.gameNaratif.courant.choix[1]
+        self.button1.text = ""
+        self.button2.text = ""
+
+
+    def setDialog(self, text):
+        self.dialogText = self.font.render(text, True, (0, 0, 0))
+        self.dialogTextRect = self.dialogText.get_rect()
+        self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
+
+
+    def setCharacter(self, path):
+        image = pygame.image.load(path)
+        self.characterImage = pygame.transform.scale(image, (400, 200))
+        self.characterImageRect = image.get_rect()
+        self.characterImageRect.x = math.ceil(self.surface.get_width() / 6)
+        self.characterImageRect.y = math.ceil(self.surface.get_height() / 3.33)
+
+
+    def setChoices(self, c1, c2):
+        self.button1.text = c1
+        self.button2.text = c2
+
+
     def handleClick(self, mousePos):
         if self.button1.isHovered(*mousePos):
-            print(self.action1)
+            # print(self.action1)
+            self.gameNaratif.buttonClick(0)
         elif self.button2.isHovered(*mousePos):
-            print(self.action2)
-    
+            # print(self.action2)
+            self.gameNaratif.buttonClick(1)
+
+        self.updateDialog()
 
 
     def draw(self, surface):
