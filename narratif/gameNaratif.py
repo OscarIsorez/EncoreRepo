@@ -6,7 +6,7 @@ from enigme import Enigme
 class Naratif:
     def __init__(self):
         self.courantName = debut
-        self.courant = Dialogue(debut, "dialogue/dialogue2")
+        self.courant = Dialogue(debut, "")
         self.suivant = self.courant.suivant()
     
         self.paragraph = self.courant.getDialog()
@@ -55,14 +55,9 @@ class Naratif:
         if(isinstance(self.courant, Enigme)):
             if(self.courant.testReponse): 
                 self.suivant = self.courant.suivant()
+    def getChoices(self): 
+        if isinstance(self.courant, Choix):
+            return self.courant.choices()
+        else : return None
     def fini(self):
         self.suivant = None
-
-a = Naratif()
-a.paragraphSuivant()
-a.allerSuivant()
-a.paragraphSuivant()
-a.paragraphSuivant()
-a.allerSuivant()
-a.inputSend("Reponse1")
-a.allerSuivant()

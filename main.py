@@ -1,8 +1,10 @@
 import pygame
 import math
-from game import Game
+from narratif import gameNaratif
 from button import Button
 from scene import Scene
+
+game = gameNaratif()
 
 pygame.init()
 
@@ -35,7 +37,7 @@ button_two = pygame.draw.rect(screen, (100, 100, 100), [
 
 
 # mickey = pygame.image.load('./assets/mickey.svg')
-scene1 = Scene(screen, FONT, "./assets/mickey.svg", "Je suis winnie et je vis dans la forêt", "Test 1", "bouton 1 scene", "Test 2", "bouton 2 scene")
+scene1 = Scene(screen, FONT, "./assets/" + game.paragraphCourant()[0] + ".svg", game.paragraphCourant()[1],"Bouton1", "bouton 1 scene", "Bouton2", "bouton 2 scene")
 
 # mickey = pygame.transform.scale(mickey, (400, 200))
 # mickey_rect = mickey.get_rect()
@@ -160,7 +162,6 @@ while running:
             else:
                 # Ajouter le caractère tapé à la chaîne de texte de l'utilisateur
                 user_text += event.unicode
-
     # Mettre à jour l'affichage
     pygame.display.flip()
 

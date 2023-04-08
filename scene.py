@@ -44,6 +44,7 @@ class Scene:
             print(self.action1)
         elif self.button2.isHovered(*mousePos):
             print(self.action2)
+    
 
 
     def draw(self, surface):
