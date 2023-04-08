@@ -1,6 +1,7 @@
 import pygame
 import math
 from game import Game
+from button import Button
 
 pygame.init()
 
@@ -28,6 +29,9 @@ button_one = pygame.draw.rect(screen, (100, 100, 100), [
 
 button_two = pygame.draw.rect(screen, (100, 100, 100), [
                               screen.get_width()/2, screen.get_height()/2, 140, 40])
+
+button_one_new = Button(screen.get_width() / 6, screen.get_height() / 1.2, 340, 70, FONT, "Test", "bouton 1 new")
+button_two_new = Button(screen.get_width() / 2, screen.get_height() / 1.2, 340, 70, FONT, "Test 2", "bouton 2 new")
 
 
 bulle = pygame.image.load('./assets/bulle1.jpg')
@@ -117,24 +121,22 @@ def update(screen):
     mouse = pygame.mouse.get_pos()
     # if mouse is hovered on a button it
     # changes to lighter shade
-    if screen.get_width() / 6 + 340 > mouse[0] > screen.get_width() / 6 and screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2:
-        pygame.draw.rect(screen, (100, 255, 100), pygame.Rect(
-            screen.get_width() / 6, screen.get_height() / 1.2, 340, 70), 0)
-    else:
-        pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(
-            screen.get_width() / 6, screen.get_height() / 1.2, 340, 70), 0)
+    # if screen.get_width() / 6 + 340 > mouse[0] > screen.get_width() / 6 and screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2:
+    #     pygame.draw.rect(screen, (100, 255, 100), pygame.Rect(
+    #         screen.get_width() / 6, screen.get_height() / 1.2, 340, 70), 0)
+    # else:
+    #     pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(
+    #         screen.get_width() / 6, screen.get_height() / 1.2, 340, 70), 0)
+
+    button_one_new.draw(screen)
         
-    screen.blit(FONT.render('choix 1!', True, 
-                    (255, 0, 0)), (screen.get_width() / 6, screen.get_height() / 1.2))
-    
-    if screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2 and screen.get_width() / 2 + 340 > mouse[0] > screen.get_width() / 2:
-        pygame.draw.rect(screen, (100, 255, 100), pygame.Rect(
-            screen.get_width() / 2, screen.get_height() / 1.2, 340, 70), 0)
-    else:
-        pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(
-            screen.get_width() / 2, screen.get_height() / 1.2, 340, 70), 0)
-    screen.blit(FONT.render('choix 2!', True,
-                    (255, 0, 0)), (screen.get_width() / 2, screen.get_height() / 1.2))
+    # if screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2 and screen.get_width() / 2 + 340 > mouse[0] > screen.get_width() / 2:
+    #     pygame.draw.rect(screen, (100, 255, 100), pygame.Rect(
+    #         screen.get_width() / 2, screen.get_height() / 1.2, 340, 70), 0)
+    # else:
+    #     pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(
+    #         screen.get_width() / 2, screen.get_height() / 1.2, 340, 70), 0)
+    button_two_new.draw(screen)
     
 
 
@@ -181,11 +183,9 @@ while running:
                 # mettre le jeu en mode lancé en changeant
                 game.start()
             mouse = pygame.mouse.get_pos()
-            # si la souris est en collision avec un des boutons verts
-            if screen.get_width() / 6 + 340 > mouse[0] > screen.get_width() / 6 and screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2:
-                print("bouton 1")
-            if screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2 and screen.get_width() / 2 + 340 > mouse[0] > screen.get_width() / 2:
-                print("bouton 2")
+
+            button_one_new.handleClick(mouse)
+            button_two_new.handleClick(mouse)
 
         elif event.type == pygame.KEYDOWN:
             # Check for backspace
