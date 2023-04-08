@@ -33,19 +33,6 @@ button_two = pygame.draw.rect(screen, (100, 100, 100), [
 
 
 
-bulle = pygame.image.load('./assets/bulle1.jpg')
-bulle = pygame.transform.scale(bulle, (400, 200))
-bulle_rect = bulle.get_rect()
-# on place l'image au centre de la partie droite de l'écran
-bulle_rect.x = math.ceil(screen.get_width() / 2)
-bulle_rect.y = math.ceil(screen.get_height() / 3.33)
-
-text = "je suis winnie et je vis dans la forêt"
-
-text = FONT.render(text, True, (0, 0, 0))
-text_rect = text.get_rect()
-text_rect.center = (bulle_rect.x + 200, bulle_rect.y + 100)
-
 
 # mickey = pygame.image.load('./assets/mickey.svg')
 scene1 = Scene(screen, FONT, "./assets/mickey.svg", "Je suis winnie et je vis dans la forêt", "Test 1", "bouton 1 scene", "Test 2", "bouton 2 scene")

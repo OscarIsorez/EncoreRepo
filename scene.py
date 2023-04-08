@@ -30,7 +30,6 @@ class Scene:
         self.dialogTextRect = self.dialogText.get_rect()
         self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
 
-
         self.button1 = Button(surface.get_width() / 6, surface.get_height() / 1.2, 340, 70, font, text1, action1)
         self.button2 = Button(surface.get_width() / 2, surface.get_height() / 1.2, 340, 70, font, text2, action2)
 
