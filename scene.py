@@ -34,9 +34,8 @@ class Scene:
         self.bulleImageRect.x = math.ceil(surface.get_width() / 2)
         self.bulleImageRect.y = math.ceil(surface.get_height() / 3.33)
 
-        self.dialogText = font.render(characterDialog, True, (0, 0, 0))
-        self.dialogTextRect = self.dialogText.get_rect()
-        self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
+        self.dialogSurface = pygame.Surface((500, 500), pygame.SRCALPHA, 32)
+        # self.setDialog(characterDialog)
 
         self.button1 = Button(surface.get_width() / 6, surface.get_height() / 1.2, 340, 70, font, text1)
         self.button2 = Button(surface.get_width() / 2, surface.get_height() / 1.2, 340, 70, font, text2)
@@ -45,10 +44,8 @@ class Scene:
 
 
     def updateDialog(self):
-        dialog = self.gameNaratif.paragraphCourant()
-        self.dialogText = self.font.render(dialog, True, (0, 0, 0))
-        self.dialogTextRect = self.dialogText.get_rect()
-        self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
+        dialog = self.gameNaratif.paragraphCourant()[1]
+        self.setDialog(dialog)
 
         # self.button1.text = self.gameNaratif.courant.choix[0]
         # self.button2.text = self.gameNaratif.courant.choix[1]
@@ -57,9 +54,18 @@ class Scene:
 
 
     def setDialog(self, text):
-        self.dialogText = self.font.render(text, True, (0, 0, 0))
-        self.dialogTextRect = self.dialogText.get_rect()
-        self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
+        dialog = text.split("\n")
+        n = 0
+        for line in dialog: 
+            
+            dialogText = self.font.render(line, True, (0, 0, 0))
+            dialogText.set_colorkey(pygame.Color(0, 0, 0))
+            dialogTextRect = dialogText.get_rect()
+            dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100 + 10*n)
+            self.dialogSurface.blit(dialogText, dialogTextRect,)
+            n += 1
+
+        pygame.display.update()
 
 
     def setCharacter(self, path):
@@ -90,12 +96,14 @@ class Scene:
         mousePos = pygame.mouse.get_pos()
 
         surface.fill(BG_COLOR)
-
+        self.dialogSurface.fill(pygame.Color(0, 0, 0, 0))
         surface.blit(self.characterImage, self.characterImageRect)
         surface.blit(self.bulleImage, self.bulleImageRect)
-        surface.blit(self.dialogText, self.dialogTextRect)
+        surface.blit(self.dialogSurface, self.dialogSurface.get_rect())
 
         # pygame.draw.rect(surface, INPUT_FIELD_PASSIVE_COLOR, self.inputRect, 0)
 
         self.button1.draw(surface, mousePos)
         self.button2.draw(surface, mousePos)
+
+        pygame.display.update()

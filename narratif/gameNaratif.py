@@ -1,16 +1,17 @@
-debut="dialoguetest"
+debut="intro"
 from narratif.dialogue import Dialogue
+from narratif.choix import Choix
 
 class Naratif:
     def __init__(self):
         self.courantName = debut
-        self.courant = Dialogue(debut, "")
+        self.courant = Dialogue(debut, "fin/fin")
         self.suivant = self.courant.suivant()
-    
+        self.is_playing = True
         self.paragraph = self.courant.getDialog()
 
         self.chemin = dict()
-        with open("./ressources/chemin.txt", "r") as f:
+        with open("./ressources/chemin.txt", "r", encoding="utf-8") as f:
             for line in f:
                 splited = line.split(";")
                 self.chemin[splited[0]] = splited[1].replace('\n', '')
@@ -38,7 +39,7 @@ class Naratif:
             if(paraSuivant == None): self.suivant = self.courant.suivant()
             else: self.paragraph = paraSuivant
     
-    def paragraphCourant(self): return self.paragraph
+    def paragraphCourant(self): return [self.paragraph[0], split_long_words(self.paragraph[1])]
     
     def buttonClick(self, index): 
         if isinstance(self.courant, Choix) :
@@ -60,3 +61,19 @@ class Naratif:
         else : return None
     def fini(self):
         self.suivant = None
+        self.is_playing = False
+    def start(self):
+        self.is_playing = True
+
+def split_long_words(text, max_length=40):
+    words = text.split()
+    result = ""
+    current_line = ""
+    for word in words:
+        if len(current_line + " " + word) <= max_length:
+            current_line += " " + word
+        else:
+            result += current_line + "\n"
+            current_line = word
+    result += current_line
+    return result

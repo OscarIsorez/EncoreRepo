@@ -2,7 +2,7 @@ from etape import Etape
 class Enigme(Etape):
     def __init__(self, name, suite):
         Etape.__init__(self, suite)
-        with open("./ressources/enigme/" + name + ".txt", "r") as f:
+        with open("./ressources/enigme/" + name + ".txt", "r", encoding="utf-8") as f:
             for line in f:
                 splited = line.split(";")
                 self.enonce = splited[0]

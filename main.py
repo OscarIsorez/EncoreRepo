@@ -3,6 +3,9 @@ import math
 from narratif import gameNaratif
 from button import Button
 from scene import Scene
+from game import Game
+
+gameStart = Game()
 
 game = gameNaratif.Naratif()
 
@@ -37,7 +40,7 @@ button_two = pygame.draw.rect(screen, (100, 100, 100), [
 
 
 # mickey = pygame.image.load('./assets/mickey.svg')
-scene1 = Scene(screen, FONT, "./assets/" + game.paragraphCourant()[0] + ".svg", game.paragraphCourant()[1],"Bouton1", "bouton 1 scene", "Bouton2", "bouton 2 scene", "btn")
+scene1 = Scene(screen, FONT, "./assets/" + game.paragraphCourant()[0] + ".jpg", game, game.paragraphCourant()[1],"Bouton1", "bouton 1 scene", "Bouton2", "bouton 2 scene")
 
 # mickey = pygame.transform.scale(mickey, (400, 200))
 # mickey_rect = mickey.get_rect()
@@ -100,13 +103,13 @@ def update(screen):
     scene1.draw(screen)
     
     #Recupére les informations à afficher
-    image = paragraphCourant()[0]
-    text = paragraphCourant()[1]
+    image = game.paragraphCourant()[0]
+    text = game.paragraphCourant()[1]
 
     scene1.setDialog(text)
     scene1.setCharacter("./assets/" + image + ".jpg")
 
-    buttonText = getChoices()
+    buttonText = game.getChoices()
     if not (buttonText is None):
         scene1.setchoices(buttonText[0], buttonText[1])
     else : scene1.setChoices("", "")
@@ -121,18 +124,18 @@ def update(screen):
 # Générer la fenetre de dialogue
 font = pygame.font.SysFont(None, 24)
 BLACK = "#000000"
-personnage = "issou"
+personnage = "mickey"
 
 dialog_out = font.render('hello', True, BLACK)
 dialog_out = pygame.transform.scale(dialog_out, (600, 400))
-photo_personnage = pygame.image.load('./assets/' + personnage + ".png")
+photo_personnage = pygame.image.load('./assets/' + personnage + ".jpg")
 
 
 # boucle tant que condition est vrai
 while running:
 
     # vérifier si notre jeu a commencé ou non
-    if game.is_playing:
+    if gameStart.is_playing:
         # déclencher les éléments de la maprtie
         update(buffer)  # dessiner les éléments du jeu sur la surface de dessin
     else:
@@ -159,7 +162,7 @@ while running:
             # vérifier si la souris est en collision avec le bouton play
             if play_button_rect.collidepoint(event.pos):
                 # mettre le jeu en mode lancé en changeant
-                game.start()
+                gameStart.start()
 
             mouse = pygame.mouse.get_pos()
 

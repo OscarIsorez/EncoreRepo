@@ -2,7 +2,7 @@ class Choix:
     def __init__(self, name):
         self.choix = []
         self.paths = []
-        with open("./ressources/choix/" + name + ".txt", "r") as f:
+        with open("./ressources/choix/" + name + ".txt", "r", encoding="utf-8") as f:
             lines = f.readlines()
             self.choix.append(lines[0].split(";"))
             self.paths.append(lines[1].split(";"))

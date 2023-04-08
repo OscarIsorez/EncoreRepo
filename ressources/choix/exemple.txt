@@ -1,2 +1,0 @@
-Choix1;dialoguetest.txt
-Choix2;dialogue2

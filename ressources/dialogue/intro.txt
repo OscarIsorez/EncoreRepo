@@ -1,0 +1,6 @@
+mickey;Winnie l'Ourson est célèbre dans la forêt des rêves bleus pour son miel exceptionnel.
+mickey;Cependant, ses amis ont commencé à remarquer un changement de comportement chez lui,
+mickey;devenant distrait, irritable et instable. Il était évident que quelque chose n'allait pas.
+mickey;Finalement, ses amis ont découvert que le miel de Winnie avait été contaminé par une drogue puissante,
+mickey;le rendant accro au "miel magique".
+mickey;Maintenant, vous êtes là pour aider Winnie

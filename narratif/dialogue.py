@@ -5,7 +5,7 @@ class Dialogue(Etape):
         Etape.__init__(self, suite)
         self.paroles = []
         self.index = 0
-        with open("./ressources/dialogue/" + name + ".txt", "r") as f:
+        with open("./ressources/dialogue/" + name + ".txt", "r", encoding="utf-8") as f:
             for line in f:
                 splited = line.split(";")
                 self.paroles.append(splited)

@@ -1,4 +1,0 @@
-dialoguetest;dialogue/dialogue2
-dialogue2;enigme/enigme1
-enigme1;choix/choix1
-choix1;fin/fin
