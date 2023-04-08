@@ -47,7 +47,7 @@ class Naratif:
             self.suivant = self.courant.getPath(0)
     
     #Input
-    def inputType():
+    def inputType(self):
         if(isinstance(self.courant, Choix)): "Button"
         elif(isinstance(self.courant, Enigme)): "Input"
         else : None
@@ -55,7 +55,7 @@ class Naratif:
         if(isinstance(self.courant, Enigme)):
             if(self.courant.testReponse): 
                 self.suivant = self.courant.suivant()
-    def fini():
+    def fini(self):
         self.suivant = None
 
 a = Naratif()
