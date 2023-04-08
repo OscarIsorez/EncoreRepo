@@ -98,6 +98,18 @@ def update(screen):
     # Dessiner la zone de texte de l'utilisateur avec la couleur appropriée
 
     scene1.draw(screen)
+    
+    #Recupére les informations à afficher
+    image = paragraphCourant()[0]
+    text = paragraphCourant()[1]
+
+    scene1.setDialogue(text)
+    scene1.setImage("./assets/" + image + ".jpg")
+
+    buttonText = getChoices()
+    if not (buttonText is None):
+        scene1.setchoices(buttonText[0], buttonText[1])
+
 
     # on dessine sur l'écran le resultat de la fonction create_text_rect
     # screen.blit(create_text_rect(choix1, base_font, screen), (screen.get_width() / 6, screen.get_height() / 2))
