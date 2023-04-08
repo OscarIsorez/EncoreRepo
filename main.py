@@ -2,6 +2,7 @@ import pygame
 import math
 from game import Game
 from button import Button
+from scene import Scene
 
 pygame.init()
 
@@ -30,8 +31,6 @@ button_one = pygame.draw.rect(screen, (100, 100, 100), [
 button_two = pygame.draw.rect(screen, (100, 100, 100), [
                               screen.get_width()/2, screen.get_height()/2, 140, 40])
 
-button_one_new = Button(screen.get_width() / 6, screen.get_height() / 1.2, 340, 70, FONT, "Test", "bouton 1 new")
-button_two_new = Button(screen.get_width() / 2, screen.get_height() / 1.2, 340, 70, FONT, "Test 2", "bouton 2 new")
 
 
 bulle = pygame.image.load('./assets/bulle1.jpg')
@@ -48,12 +47,14 @@ text_rect = text.get_rect()
 text_rect.center = (bulle_rect.x + 200, bulle_rect.y + 100)
 
 
-mickey = pygame.image.load('./assets/mickey.svg')
-mickey = pygame.transform.scale(mickey, (400, 200))
-mickey_rect = mickey.get_rect()
-# on place l'image au centre de la partie gauche de l'écran
-mickey_rect.x = math.ceil(screen.get_width() / 6)
-mickey_rect.y = math.ceil(screen.get_height() / 3.33)
+# mickey = pygame.image.load('./assets/mickey.svg')
+scene1 = Scene(screen, FONT, "./assets/mickey.svg", "Je suis winnie et je vis dans la forêt", "Test 1", "bouton 1 scene", "Test 2", "bouton 2 scene")
+
+# mickey = pygame.transform.scale(mickey, (400, 200))
+# mickey_rect = mickey.get_rect()
+# # on place l'image au centre de la partie gauche de l'écran
+# mickey_rect.x = math.ceil(screen.get_width() / 6)
+# mickey_rect.y = math.ceil(screen.get_height() / 3.33)
 
 # créer une surface de dessin (buffer) pour afficher les éléments du jeu en arrière-plan
 buffer = pygame.Surface(screen.get_size())
@@ -63,8 +64,6 @@ base_font = pygame.font.Font(None, 32)
 user_text = ''
 
 # create rectangle
-input_rect = pygame.Rect(200, 200, 140, 32)
-
 # color_active stores color(lightskyblue3) which
 # gets active when input box is clicked by user
 color_active = pygame.Color('lightskyblue3')
@@ -105,23 +104,15 @@ def get_text_rect_dimensions(text, font, screen):
 
 
 def update(screen):
-    screen.fill((255, 255, 0))
     # Dessiner la surface de dessin sur l'écran de jeu
     # screen.blit(buffer, (0, 0))
     # Dessiner la zone de texte de l'utilisateur avec la couleur appropriée
-    pygame.draw.rect(screen, color, input_rect, 0)
-    text_surface = base_font.render(user_text, True, pygame.Color('black'))
-    screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
-    screen.blit(mickey, mickey_rect)
-    screen.blit(bulle, bulle_rect)
-    screen.blit(text, text_rect)
+
+    scene1.draw(screen)
+
     # on dessine sur l'écran le resultat de la fonction create_text_rect
     # screen.blit(create_text_rect(choix1, base_font, screen), (screen.get_width() / 6, screen.get_height() / 2))
 # the variable as a tuple
-    mouse = pygame.mouse.get_pos()
-
-    button_one_new.draw(screen, mouse)
-    button_two_new.draw(screen, mouse)
     
 
 
@@ -167,10 +158,10 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # mettre le jeu en mode lancé en changeant
                 game.start()
+
             mouse = pygame.mouse.get_pos()
 
-            button_one_new.handleClick(mouse)
-            button_two_new.handleClick(mouse)
+            scene1.handleClick(mouse)
 
         elif event.type == pygame.KEYDOWN:
             # Check for backspace
