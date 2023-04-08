@@ -24,6 +24,10 @@ class Button:
         if self.isHovered(*mousePos):
             print(self.action)
 
-    def draw(self, surface):
-        pygame.draw.rect(surface, BTN_COLOR, [self.x, self.y, self.w, self.h])
+    def draw(self, surface, mousePos):
+        if self.isHovered(*mousePos):
+            color = BTN_HOVER_COLOR
+        else:
+            color = BTN_COLOR
+        pygame.draw.rect(surface, color, [self.x, self.y, self.w, self.h])
         surface.blit(self.font.render(self.text, True, (255, 0, 0)), (self.x, self.y))

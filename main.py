@@ -119,24 +119,9 @@ def update(screen):
     # screen.blit(create_text_rect(choix1, base_font, screen), (screen.get_width() / 6, screen.get_height() / 2))
 # the variable as a tuple
     mouse = pygame.mouse.get_pos()
-    # if mouse is hovered on a button it
-    # changes to lighter shade
-    # if screen.get_width() / 6 + 340 > mouse[0] > screen.get_width() / 6 and screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2:
-    #     pygame.draw.rect(screen, (100, 255, 100), pygame.Rect(
-    #         screen.get_width() / 6, screen.get_height() / 1.2, 340, 70), 0)
-    # else:
-    #     pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(
-    #         screen.get_width() / 6, screen.get_height() / 1.2, 340, 70), 0)
 
-    button_one_new.draw(screen)
-        
-    # if screen.get_height() / 1.2 + 70 > mouse[1] > screen.get_height() / 1.2 and screen.get_width() / 2 + 340 > mouse[0] > screen.get_width() / 2:
-    #     pygame.draw.rect(screen, (100, 255, 100), pygame.Rect(
-    #         screen.get_width() / 2, screen.get_height() / 1.2, 340, 70), 0)
-    # else:
-    #     pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(
-    #         screen.get_width() / 2, screen.get_height() / 1.2, 340, 70), 0)
-    button_two_new.draw(screen)
+    button_one_new.draw(screen, mouse)
+    button_two_new.draw(screen, mouse)
     
 
 
