@@ -12,9 +12,9 @@ class Scene:
         image = pygame.image.load(characterImage)
 
         self.characterImage = pygame.transform.scale(image, (400, 200))
-        self.imageRect = image.get_rect()
-        self.imageRect.x = math.ceil(surface.get_width() / 6)
-        self.imageRect.y = math.ceil(surface.get_height() / 3.33)
+        self.characterImageRect = image.get_rect()
+        self.characterImageRect.x = math.ceil(surface.get_width() / 6)
+        self.characterImageRect.y = math.ceil(surface.get_height() / 3.33)
 
         self.characterDialog = characterDialog
 
@@ -34,7 +34,7 @@ class Scene:
 
         surface.fill(BG_COLOR)
 
-        surface.blit(self.characterImage, self.imageRect)
+        surface.blit(self.characterImage, self.characterImageRect)
 
         # pygame.draw.rect(surface, INPUT_FIELD_PASSIVE_COLOR, self.inputRect, 0)
 
