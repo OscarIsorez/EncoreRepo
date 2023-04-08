@@ -11,6 +11,9 @@ BULLE_IMG_PATH = "./assets/bulle1.jpg"
 
 class Scene:
     def __init__(self, surface, font, characterImage, characterDialog, text1, action1, text2, action2):
+        self.action1 = action1
+        self.action2 = action2
+
         image = pygame.image.load(characterImage)
 
         self.characterImage = pygame.transform.scale(image, (400, 200))
@@ -30,15 +33,17 @@ class Scene:
         self.dialogTextRect = self.dialogText.get_rect()
         self.dialogTextRect.center = (self.bulleImageRect.x + 200, self.bulleImageRect.y + 100)
 
-        self.button1 = Button(surface.get_width() / 6, surface.get_height() / 1.2, 340, 70, font, text1, action1)
-        self.button2 = Button(surface.get_width() / 2, surface.get_height() / 1.2, 340, 70, font, text2, action2)
+        self.button1 = Button(surface.get_width() / 6, surface.get_height() / 1.2, 340, 70, font, text1)
+        self.button2 = Button(surface.get_width() / 2, surface.get_height() / 1.2, 340, 70, font, text2)
 
         self.inputRect = pygame.Rect(200, 200, 140, 32)
 
 
     def handleClick(self, mousePos):
-        self.button1.handleClick(mousePos)
-        self.button2.handleClick(mousePos)
+        if self.button1.isHovered(*mousePos):
+            print(self.action1)
+        elif self.button2.isHovered(*mousePos):
+            print(self.action2)
 
 
     def draw(self, surface):
