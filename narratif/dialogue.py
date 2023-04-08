@@ -13,13 +13,14 @@ class Dialogue(Etape):
             return self.paroles[self.index]
         else: 
             return None
+
     def next(self):
         if(self.index < len(self.paroles)) :
-            self.index += 1
+            self.index = self.index + 1
             return self.getDialog()
         else: return None
     def previous(self):
         if(self.index > 0):
-            self.index -= 1
+            self.index = self.index - 1
             return getDialog(self)
         else: return None
