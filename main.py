@@ -4,7 +4,7 @@ from narratif import gameNaratif
 from button import Button
 from scene import Scene
 
-game = gameNaratif()
+game = gameNaratif.Naratif()
 
 pygame.init()
 
@@ -12,7 +12,7 @@ pygame.init()
 clock = pygame.time.Clock()
 FPS = 60
 FONT = pygame.font.Font(None, 32)
-game = Game()
+game = gameNaratif.Naratif()
 running = True
 
 # générer la fenêtre du jeu
@@ -37,7 +37,7 @@ button_two = pygame.draw.rect(screen, (100, 100, 100), [
 
 
 # mickey = pygame.image.load('./assets/mickey.svg')
-scene1 = Scene(screen, FONT, "./assets/" + game.paragraphCourant()[0] + ".svg", game.paragraphCourant()[1],"Bouton1", "bouton 1 scene", "Bouton2", "bouton 2 scene")
+scene1 = Scene(screen, FONT, "./assets/" + game.paragraphCourant()[0] + ".svg", game.paragraphCourant()[1],"Bouton1", "bouton 1 scene", "Bouton2", "bouton 2 scene", "btn")
 
 # mickey = pygame.transform.scale(mickey, (400, 200))
 # mickey_rect = mickey.get_rect()
@@ -103,12 +103,13 @@ def update(screen):
     image = paragraphCourant()[0]
     text = paragraphCourant()[1]
 
-    scene1.setDialogue(text)
-    scene1.setImage("./assets/" + image + ".jpg")
+    scene1.setDialog(text)
+    scene1.setCharacter("./assets/" + image + ".jpg")
 
     buttonText = getChoices()
     if not (buttonText is None):
         scene1.setchoices(buttonText[0], buttonText[1])
+    else : scene1.setChoices("", "")
 
 
     # on dessine sur l'écran le resultat de la fonction create_text_rect

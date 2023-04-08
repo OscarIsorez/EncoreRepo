@@ -1,7 +1,5 @@
 debut="dialoguetest"
-from dialogue import Dialogue
-from choix import Choix
-from enigme import Enigme
+from narratif.dialogue import Dialogue
 
 class Naratif:
     def __init__(self):

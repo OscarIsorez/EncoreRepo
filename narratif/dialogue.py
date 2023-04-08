@@ -1,4 +1,5 @@
-from etape import Etape
+
+from narratif.etape import Etape
 class Dialogue(Etape):
     def __init__(self, name, suite):
         Etape.__init__(self, suite)
