@@ -21,5 +21,5 @@ class Dialogue(Etape):
     def previous(self):
         if(self.index > 0):
             self.index -= 1
-            return getDialog(self)
+            return self.getDialog(self)
         else: return None
